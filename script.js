@@ -7,7 +7,13 @@ function appendValue(value) {
   if (value === '*' && currentValue.slice(-1) === '*') return;
   if (value === '/' && currentValue.slice(-1) === '/') return;
 
-  display.value += value;
+  if (value === "%") {
+    if (currentValue) {
+      display.value += "%"; 
+    }
+  } else {
+    display.value += value; 
+  }
 }
 
 function clearDisplay() {

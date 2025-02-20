@@ -2,17 +2,18 @@ function appendValue(value) {
   const display = document.getElementById("display");
   const currentValue = display.value;
 
-  if (value === '+' && currentValue.slice(-1) === '+') return;
-  if (value === '-' && currentValue.slice(-1) === '-') return;
-  if (value === '*' && currentValue.slice(-1) === '*') return;
-  if (value === '/' && currentValue.slice(-1) === '/') return;
+  if (value === "+" && currentValue.slice(-1) === "+") return;
+  if (value === "-" && currentValue.slice(-1) === "-") return;
+  if (value === "" && currentValue.slice(-1) === "") return;
+  if (value === "/" && currentValue.slice(-1) === "/") return;
+  if (value === "%" && currentValue.slice(-1) === "%") return;
 
   if (value === "%") {
     if (currentValue) {
-      display.value += "%"; 
+      display.value += "%";
     }
   } else {
-    display.value += value; 
+    display.value += value;
   }
 }
 
@@ -24,23 +25,21 @@ function calculate() {
   const display = document.getElementById("display");
   let expression = display.value;
 
+  if (expression.includes("/0")) {
+    display.value = "Tidak bisa dibagi dengan nol";
+    return;
+  }
+
+  expression = expression.replace(/(\d+)%/g, (match, p1) => p1 * 0.01);
+
   try {
-    if (expression.includes("/0")) {
-      display.value = "Tidak bisa dibagi dengan nol";
-      return;
-    }
-
     let result = eval(expression);
-    display.value = result;
-
+    display.value = result; 
   } catch (error) {
-    if(error instanceof SyntaxError){
-        display.value = "Error: Data Tidak Valid";
-    } else if (error instanceof TypeError){
-        display.value = "Error: Tipe Data Tidak Valid";
-    } else{
-        display.value = "Error: Terjadi Kesalahan";
+    if (error instanceof SyntaxError) {
+      display.value = "Error: Data Tidak Valid";
+    } else if (error instanceof TypeError) {
+      display.value = "Error";
     }
-    console.error("Calculation error:", error);
   }
 }

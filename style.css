@@ -63,3 +63,21 @@ body{
 .clear:active{
   background-color: rgb(204, 6, 6);
 }
+
+.btn:nth-child(5) { /* Tombol angka 4 */
+  background-color: #4CAF50; /* Warna hijau */
+  color: white;
+}
+
+.btn:nth-child(6) { /* Tombol angka 5 */
+  background-color: #2196F3; /* Warna biru */
+  color: white;
+}
+
+.btn:nth-child(5):active { /* Efek klik tombol 4 */
+  background-color: #388E3C;
+}
+
+.btn:nth-child(6):active { /* Efek klik tombol 5 */
+  background-color: #1976D2;
+}
